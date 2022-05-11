@@ -18,13 +18,14 @@ export class HomeComponent implements OnInit {
   sent = [];
 
   constructor(private WebsocketService: HomeServiceService) {
-    WebsocketService.messages.subscribe(msg => {
-      this.received.push(msg);
-      console.log("Response from websocket: " + msg);
-    });
+
   }
 
   ngOnInit() {
+    this.WebsocketService.messages.subscribe(msg => {
+      this.received.push(msg);
+      console.log("Response from websocket: " + msg);
+    });
   }
 
 
