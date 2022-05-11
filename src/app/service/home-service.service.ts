@@ -4,11 +4,6 @@ import { map, Observable, Observer, Subject } from 'rxjs';
 
 const CHAT_URL = "ws://localhost:8000";
 
-export interface Message {
-  source: string;
-  content: string;
-}
-
 
 @Injectable({
   providedIn: 'root'
@@ -16,12 +11,12 @@ export interface Message {
 export class HomeServiceService {
 
   private subject: AnonymousSubject<MessageEvent>;
-  public messages: Subject<Message>;
+  public messages: any;
 
   constructor() {
-    this.messages = <Subject<Message>>this.connect(CHAT_URL).pipe(
+    this.messages = this.connect(CHAT_URL).pipe(
       map(
-        (response: MessageEvent): Message => {
+        (response) => {
           console.log(response.data);
           let data = JSON.parse(response.data)
           return data;
